@@ -15,8 +15,9 @@ function jgetopt() {
             suffix=:
             1=${1%:}
         fi
+        typeset -a descSplit
         descSplit=(${(s:,:)1})
-        firstDesc=$descSplit[1]
+        local firstDesc=$descSplit[1]
         local helpHeader=--$firstDesc
         if [[ ${#firstDesc} == 1 ]] ; then
             helpHeader="-$firstDesc"
@@ -40,10 +41,11 @@ function jgetopt() {
     aliases[h]=help
 
     zparseopts -D -K -E -A opts -- $descs
+    typeset -a positionals
     positionals=$*
 
     for key in ${(k)opts} ; do
-        val=$opts[$key]
+        local val=$opts[$key]
         key=${key//-/}
         key=${aliases[$key]:-$key}
         if [[ $key == help ]] ; then
@@ -53,8 +55,10 @@ function jgetopt() {
             exit 1
         else
             val=${val#=} # TODO: allow values that start with =
+            eval "typeset -g $key"
             eval "$key=\"$val\""
         fi
     done
 }
 
+jgetopt $*
