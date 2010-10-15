@@ -1,5 +1,5 @@
 emulate -L zsh
-setopt extendedglob nonomatch warncreateglobal
+setopt warncreateglobal
 
 function jgetopt() {
     local title=$1
