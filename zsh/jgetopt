@@ -1,0 +1,60 @@
+emulate -L zsh
+setopt extendedglob nonomatch warncreateglobal
+
+function jgetopt() {
+    local title=$1
+    local description=$2
+    shift 2
+
+    typeset -a descs
+    typeset -A aliases
+    typeset -a help
+    while [[ $1 != -- ]] ; do
+        local suffix=
+        if [[ $1 == *: ]] ; then
+            suffix=:
+            1=${1%:}
+        fi
+        descSplit=(${(s:,:)1})
+        firstDesc=$descSplit[1]
+        local helpHeader=--$firstDesc
+        if [[ ${#firstDesc} == 1 ]] ; then
+            helpHeader="-$firstDesc"
+        fi
+        descs+="-$firstDesc$suffix"
+
+        firstDesc=${firstDesc//-/_}
+        for desc in $descSplit[2,-1] ; do
+            aliases[$desc]=$firstDesc
+            descs+="$desc$suffix"
+            helpHeader+=", -$desc"
+        done
+
+        [ -n "$suffix" ] && helpHeader+=" <arg>"
+        help+=("  $helpHeader" $2)
+        shift 2
+    done
+    shift # remove --
+    descs+=(-help h)
+    help+=("  --help, -h" "show this help message")
+    aliases[h]=help
+
+    zparseopts -D -K -E -A opts -- $descs
+    positionals=$*
+
+    for key in ${(k)opts} ; do
+        val=$opts[$key]
+        key=${key//-/}
+        key=${aliases[$key]:-$key}
+        if [[ $key == help ]] ; then
+            echo "$title:t $description"
+            echo "usage: $title [arguments]"
+            print -a -C2 -- $help
+            exit 1
+        else
+            val=${val#=} # TODO: allow values that start with =
+            eval "$key=\"$val\""
+        fi
+    done
+}
+
