@@ -41,8 +41,8 @@ function jgetopt() {
     aliases[h]=help
 
     zparseopts -D -K -E -A opts -- $descs
-    typeset -a positionals
-    positionals=$*
+    typeset -ga positionals
+    positionals=($*)
 
     for key in ${(k)opts} ; do
         local val=$opts[$key]
