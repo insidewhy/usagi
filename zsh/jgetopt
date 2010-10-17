@@ -11,7 +11,7 @@ function jgetopt() {
     typeset -a help
     while [[ $1 != -- ]] ; do
         local suffix=
-        if [[ $1 == *: ]] ; then
+        if [[ $1 = *: ]] ; then
             suffix=:
             1=${1%:}
         fi
@@ -19,7 +19,7 @@ function jgetopt() {
         descSplit=(${(s:,:)1})
         local firstDesc=$descSplit[1]
         local helpHeader=--$firstDesc
-        if [[ ${#firstDesc} == 1 ]] ; then
+        if [[ ${#firstDesc} -eq 1 ]] ; then
             helpHeader="-$firstDesc"
         fi
         descs+="-$firstDesc$suffix"
@@ -48,7 +48,7 @@ function jgetopt() {
         local val=$opts[$key]
         key=${key//-/}
         key=${aliases[$key]:-$key}
-        if [[ $key == help ]] ; then
+        if [[ $key = help ]] ; then
             echo "$title:t $description"
             echo "usage: $title [arguments]"
             print -a -C2 -- $help
