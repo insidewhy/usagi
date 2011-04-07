@@ -1,0 +1,17 @@
+setopt warncreateglobal
+
+function seqtmp() {
+    if [ ! -e "$1" ] ; then
+        mkdir "$1"
+        echo "$1"
+        return
+    fi
+    local i=0
+    while [ -e "$1.$i" ] ; do
+        (( i = i + 1 ))
+    done
+    mkdir "$1.$i"
+    echo "$1.$i"
+}
+
+seqtmp $*
