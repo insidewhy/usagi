@@ -1,8 +1,13 @@
 setopt warncreateglobal
 
 function seqtmp() {
+    if [[ $1 = -d ]] ; then
+        local is_dir=1
+        shift
+    fi
+
     if [ ! -e "$1" ] ; then
-        mkdir "$1"
+        [[ -z $is_dir ]] && touch "$1" || mkdir "$1"
         echo "$1"
         return
     fi
@@ -10,7 +15,8 @@ function seqtmp() {
     while [ -e "$1.$i" ] ; do
         (( i = i + 1 ))
     done
-    mkdir "$1.$i"
+
+    [[ -z $is_dir ]] && touch "$1.$i" || mkdir "$1.$i"
     echo "$1.$i"
 }
 
