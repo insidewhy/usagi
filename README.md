@@ -39,3 +39,21 @@ verbosity: 0
 argument: ''
 remaining:  ''
 ```
+
+## seqtmp
+
+For creating sequentially numbered files.
+
+```shell
+$ ls hello*
+zsh: no matches found: hello*
+$ autoload seqtmp
+$ seqtmp hello
+$ ls hello*
+hello
+$ seqtmp hello
+$ seqtmp hello
+$ ls hello*
+hello hello.0 hello.1
+```
+
