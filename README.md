@@ -68,7 +68,7 @@ hello hello.0 hello.1
 This program facilitates watching shows and recording whether they have been watched in $HOME/.showtimes and, if available, $PWD/.showlist (to facilitate recording which episode is next). If the script terminates before the length of the movie file then the script asks the user if the file should be logged or not.
 
 ```sh
-% ./bin/Show.zsh -h
+$ ./bin/Show.zsh -h
 Show.zsh (please enjoy your evening)
 usage: ./bin/Show.zsh [arguments]
   --create, -c  add new shows in directory to series list
@@ -85,9 +85,9 @@ usage: ./bin/Show.zsh [arguments]
 To create an index in a directory containing a list of shows.
 
 ```sh
-% cd /media/anime/planetes
-% Show -c
-% head -n3 .showlist
+$ cd /media/anime/planetes
+$ Show -c
+$ head -n3 .showlist
 Planetes-01.avi
 Planetes-02.avi
 Planetes-03.avi
@@ -99,9 +99,9 @@ To watch the next episode:
 $ Show.zsh
 mplayer Planetes-01.avi
 ... etc ...
-% date
+$ date
 Sun 12 May 12:00:00 BST 2013
-% head -n3 .showlist
+$ head -n3 .showlist
 *2012-05-12~12:00:00 Planetes-01.avi
 Planetes-02.avi
 Planetes-03.avi
