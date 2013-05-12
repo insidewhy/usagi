@@ -68,9 +68,9 @@ hello hello.0 hello.1
 This program facilitates watching shows with mplayer and recording whether they have been watched in $HOME/.showtimes and, if available, $PWD/.showlist (to facilitate recording which episode is next). If the script terminates before the length of the movie file then the script asks the user if the file should be logged or not.
 
 ```sh
-$ ./bin/Show.zsh -h
+$ Show.zsh -h
 Show.zsh (please enjoy your evening)
-usage: ./bin/Show.zsh [arguments]
+usage: Show.zsh [arguments]
   --create, -c  add new shows in directory to series list
   --last, -l    watch previously watched show
   --norm, -n    do the volume normalisation
@@ -118,9 +118,9 @@ Planetes-02.avi
 Changes background using feh, and can also rotate the background over many images in a directory with a configurable interval.
 
 ```sh
-$ ./bin/ChangeBgs.zsh -h
+$ ChangeBgs.zsh -h
 ChangeBgs.zsh  (please enjoy your evening)
-usage: ./bin/ChangeBgs.zsh [arguments]
+usage: ChangeBgs.zsh [arguments]
   --interval, -i  change interval (default: 600)
   --help, -h      show this help message
 ```
