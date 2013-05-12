@@ -17,7 +17,7 @@ jgetopt $0 "test program"           \
 
 echo "verbosity: ${+verbose}"
 echo "argument: '$argument'"
-echo "remaining: '$*'"
+echo "remaining: '$positionals'" # jgetopt sets this global variable
 ```
 
 Some test runs of the above program:

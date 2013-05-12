@@ -2,27 +2,30 @@
 
 # defaults
 interval=600
-dir=.
 
 autoload jgetopt
 jgetopt $0 " (please enjoy your evening)" \
-  interval,i  "change interval (default: $interval)" \
+  interval,i:  "change interval (default: $interval)" \
   -- $*
 
-if [[ -n $1 ]] ; then
-  if [[ -f $1 ]] ; then
-    feh --bg-scale $1
-    exit 0
-  elif [[ -d $1 ]] ; then
-    dir=$1
-  else
-    echo "bad argument $*"
-    exit 1
-  fi
+arg=$positionals[1]
+
+if [[ -z $arg ]] ; then
+  echo "must supply directory or image file"
+  exit 1
 fi
 
-while true ; do
-  files=($dir/*.(jpg|png))
-  feh &>/dev/null --bg-scale $files[$RANDOM%$#files+1]
-  sleep $interval
-done
+if [[ -f $arg ]] ; then
+  feh --bg-scale $arg
+elif [[ -d $arg ]] ; then
+  while true ; do
+    files=($arg/*.(jpg|png))
+    feh &>/dev/null --bg-scale $files[$RANDOM%$#files+1]
+    sleep $interval
+  done
+else
+  echo "bad argument $arg"
+  exit 1
+fi
+
+exit 0
