@@ -65,7 +65,7 @@ hello hello.0 hello.1
 
 ### Show.zsh
 
-This program facilitates watching shows and recording whether they have been watched in $HOME/.showtimes and, if available, $PWD/.showlist (to facilitate recording which episode is next). If the script terminates before the length of the movie file then the script asks the user if the file should be logged or not.
+This program facilitates watching shows with mplayer and recording whether they have been watched in $HOME/.showtimes and, if available, $PWD/.showlist (to facilitate recording which episode is next). If the script terminates before the length of the movie file then the script asks the user if the file should be logged or not.
 
 ```sh
 $ ./bin/Show.zsh -h
