@@ -96,11 +96,11 @@ Planetes-03.avi
 To watch the next episode:
 
 ```sh
+$ date
+Sun 12 May 12:00:00 BST 2013
 $ Show.zsh
 mplayer Planetes-01.avi
 ... etc ...
-$ date
-Sun 12 May 12:00:00 BST 2013
 $ head -n3 .showlist
 *2012-05-12~12:00:00 Planetes-01.avi
 Planetes-02.avi
