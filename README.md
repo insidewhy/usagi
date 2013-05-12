@@ -112,3 +112,27 @@ To see which episode is next:
 $ Show.zsh -p
 Planetes-02.avi
 ```
+
+### ChangeBgs.zsh
+
+Changes background using feh, and can also rotate the background over many images in a directory with a configurable interval.
+
+```sh
+$ ./bin/ChangeBgs.zsh -h
+ChangeBgs.zsh  (please enjoy your evening)
+usage: ./bin/ChangeBgs.zsh [arguments]
+  --interval, -i  change interval (default: 600)
+  --help, -h      show this help message
+```
+
+Change background to a file.
+```sh
+$ ChangeBgs.zsh totoro.jpeg
+```
+
+Change background to a random file in given directory every minute.
+```sh
+$ ls
+totoro-pics/ totoro.jpeg
+$ ChangeBgs.zsh -i60 totoro-pics
+```
