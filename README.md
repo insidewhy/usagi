@@ -65,6 +65,8 @@ hello hello.0 hello.1
 
 ### Show.zsh
 
+This program facilitates watching shows and recording whether they have been watched in $HOME/.showtimes and, if available, $PWD/.showlist (to facilitate recording which episode is next). If the script terminates before the length of the movie file then the script asks the user if the file should be logged or not.
+
 ```shell
 % ./bin/Show.zsh -h
 Show.zsh (please enjoy your evening)
@@ -108,5 +110,5 @@ Planetes-03.avi
 To see which episode is next:
 ```shell
 $ Show.zsh -p
-Planetes-01.avi
+Planetes-02.avi
 ```
