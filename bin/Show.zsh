@@ -4,6 +4,11 @@
 showtime=$(date +%s)
 showtime_fmt=$(date +%Y-%m-%d~%H:%M:%S -d@$showtime) # as string
 
+player=(mplayer)
+if ps auxww | grep -v grep | grep -q 'pulseaudio --start' ; then
+  player+=(-ao pulse)
+fi
+
 time_too_low=30
 time_delta_accepted=40
 
@@ -36,7 +41,7 @@ fail() {
 play_show() {
     local length=$(mplayer -frames 0 -identify $show 2>/dev/null \
                    | grep ID_LENGTH | cut -d= -f2)
-    mplayer $args $show || return 1
+    $player $args $show || return 1
 
     [[ $+test = 1 || $+last = 1 ]] && return 1
 
@@ -73,6 +78,7 @@ jgetopt $0 "(please enjoy your evening)" \
     print,p  "print next show" \
     test,t  "test next show" \
     times,T "just show watch show times" \
+    highvol,H "increase volume of video" \
     -- $*
 
 if [[ $+times = 1 ]] ; then
@@ -92,6 +98,10 @@ fi
 
 if [[ $+norm = 1 ]] ; then
     args=(-af volnorm)
+fi
+
+if [[ $+highvol = 1 ]] ; then
+    args=(-af volume=14)
 fi
 
 if [[ $+back = 1 ]] ; then
