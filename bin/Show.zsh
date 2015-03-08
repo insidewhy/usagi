@@ -4,7 +4,7 @@
 showtime=$(date +%s)
 showtime_fmt=$(date +%Y-%m-%d~%H:%M:%S -d@$showtime) # as string
 
-player=(mplayer)
+player=(mpv)
 if ps auxww | grep -v grep | grep -q 'pulseaudio --start' ; then
   player+=(-ao pulse)
 fi
