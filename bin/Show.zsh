@@ -41,7 +41,11 @@ fail() {
 play_show() {
     local length=$(mplayer -frames 0 -identify $show 2>/dev/null \
                    | grep ID_LENGTH | cut -d= -f2)
-    $player $args $show || return 1
+
+    extra_args_file=$(dirname $show)/.mpv-args
+    [ -f $extra_args_file ] && extra_args=($(cat $extra_args_file))
+
+    $player $args $extra_args $show || return 1
 
     [[ $+test = 1 || $+last = 1 ]] && return 1
 
@@ -97,7 +101,7 @@ if [[ $+create = 1 ]] ; then
 fi
 
 if [[ $+norm = 1 ]] ; then
-    args=(-af volnorm)
+    args=(-af drc)
 fi
 
 if [[ $+highvol = 1 ]] ; then
